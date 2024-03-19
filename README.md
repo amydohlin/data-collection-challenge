@@ -40,6 +40,8 @@ Once parsing was completed, the tags and classes for table elements were extract
     * header row: th
     * data row: tr, td, class = "data-row"
     
+The instructions pointed to using BeautifulSoup to scrape the table information, but I could not get the code to work (original code is still in the notebook for grading purposes, but it is commented out). Instead I used Pandas to scrape the table information and arrange it into a dataframe.
+    
 
 * The HTML table was extracted into a Pandas DataFrame. Either Pandas or Splinter and Beautiful Soup were used to scrape the data. The columns have the correct headings and data types. (15 points)
 
