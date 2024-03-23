@@ -9,13 +9,11 @@ In this challenge, the main objective was to use the Python libraries Splinter a
 ## Part 1: Scrape Titles and Preview Text from Mars News
 ----
 Variables Created:
-* mars_soup: BeautifulSoup object
-* all_text: all text elements on website
-* articles: list that holds all article dictionaries
-* text_elements: all plain text elements on website
-* title: article title
-* preview: article preview
-* article_dict: dictionary to store each title and preview pair
+| Variable Name | Description |
+|---------|------|
+| mars_soup | BeautifulSoup object |
+| all_text | stores text found by using mars_soup |
+| articles | list storing each dictionary with its Title and Preview pair |
 
 The first steps toward scraping the website involved importing Splinter and BeautifulSoup from Python. Splinter enables the code to visit the website in a browser and gather/inspect the HTML code. BeautifulSoup allows the coder to dig through the HTML for tags and classes of elements, and extract the information needed.
 
@@ -27,12 +25,21 @@ Once I implemented the for-loop and ran it without errors, I printed the list to
 
 ## Part 2: Scrape and Analyze Mars Weather Data
 ----
-Variables Created:
-* table: parse the table from the website
-* rows: rows in the table
-* mars_weather: dictionary to store extracted table information
-* row_heading: table row headers
-* row_data: table row data
+| Variable Name | Description |
+|---------|------|
+| soup | BeautifulSoup object |
+| weather_df | dataframe for Mars weather data taken from HTML |
+| mars_weather | list to contain row information from weather_df |
+| columns | list of columns from keys in the mars_weather list |
+| mars_weather_df | dataframe created from the mars_weather list |
+| avg_temp | average temps grouped by Martian Month |
+| avg_temp_df | df created from avg_temp, used to create bar chart |
+| coldest_month | stores min avg temp by Martian month |
+| hottest_month | stores max avg temp by Martian month |
+| coldest | finds the corresponding Martian month with min avg temp |
+| hottest | finds the corresponding Martian month with max avg temp |
+| avg_pressure | avg pressure grouped by Martian month |
+| avg_pressure_df | df created from avg_pressure, used to create bar chart |
 
 In this portion of the assignment I used Splinter and BeautifulSoup again to visit and read the HTML from the website, as well as explore the website with Chrome DevTools.
 
@@ -40,7 +47,8 @@ Once parsing was completed, the tags and classes for table elements were extract
     * header row: th
     * data row: tr, td, class = "data-row"
     
-The instructions pointed to using BeautifulSoup to scrape the table information, but I could not get the code to work (original code is still in the notebook for grading purposes, but it is commented out). Instead I used Pandas to scrape the table information and arrange it into a dataframe.
+The instructions pointed to using BeautifulSoup to scrape the table information, but I could not get the code to work (original code is shown below and is still in the notebook for grading purposes, but it is commented out). Instead I used Pandas to scrape the table information and arrange it into a dataframe.
+
 
 issue with the min temp not showing up in table; took out the (C) in the column name and that fixed the problem, not sure why
     
