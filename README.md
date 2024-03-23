@@ -41,6 +41,8 @@ Once parsing was completed, the tags and classes for table elements were extract
     * data row: tr, td, class = "data-row"
     
 The instructions pointed to using BeautifulSoup to scrape the table information, but I could not get the code to work (original code is still in the notebook for grading purposes, but it is commented out). Instead I used Pandas to scrape the table information and arrange it into a dataframe.
+
+issue with the min temp not showing up in table; took out the (C) in the column name and that fixed the problem, not sure why
     
 
 * The HTML table was extracted into a Pandas DataFrame. Either Pandas or Splinter and Beautiful Soup were used to scrape the data. The columns have the correct headings and data types. (15 points)
@@ -53,6 +55,8 @@ The instructions pointed to using BeautifulSoup to scrape the table information,
     * Which month, on average, has the lowest temperature? The highest? (10 points)
     * Which month, on average, has the lowest atmospheric pressure? The highest? (10 points)
     * How many terrestrial days exist in a Martian year? A visual estimate within 25% was made. (10 points)
+    
+Using the Xpert Learning Assistant and the prompt "module 11 challenge "how many terrestrial (earth) days are there in a martian year?" hints", 
     
 The DataFrame was exported into a CSV file. (5 points)
 
