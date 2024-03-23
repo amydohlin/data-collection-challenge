@@ -48,7 +48,7 @@ Once parsing was completed, the tags and classes for table elements were extract
     * data row: tr, td, class = "data-row"
     
 The instructions pointed to using BeautifulSoup to scrape the table information, but I could not get the code to work (original code is shown below and is still in the notebook for grading purposes, but it is commented out). Instead I used Pandas to scrape the table information and arrange it into a dataframe.
-
+![](Mars_Weather_Results/.png?raw=true)
 
 issue with the min temp not showing up in table; took out the (C) in the column name and that fixed the problem, not sure why
     
