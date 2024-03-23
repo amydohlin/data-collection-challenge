@@ -41,26 +41,41 @@ Once I implemented the for-loop and ran it without errors, I printed the list to
 | avg_pressure | avg pressure grouped by Martian month |
 | avg_pressure_df | df created from avg_pressure, used to create bar chart |
 
+# Data Preparation
 In this portion of the assignment I used Splinter and BeautifulSoup again to visit and read the HTML from the website, as well as explore the website with Chrome DevTools.
 
 Once parsing was completed, the tags and classes for table elements were extracted:
     * header row: th
     * data row: tr, td, class = "data-row"
     
-The instructions pointed to using BeautifulSoup to scrape the table information, but I could not get the code to work (original code is shown below and is still in the notebook for grading purposes, but it is commented out). Instead I used Pandas to scrape the table information and arrange it into a dataframe.
-![](Mars_Weather_Results/part_2_soup_fail.png?raw=true)
+The instructions pointed to using BeautifulSoup to scrape the table information, but I could not get the code to work (original code is shown below and is still in the notebook for grading purposes, but it is commented out).
 
-issue with the min temp not showing up in table; took out the (C) in the column name and that fixed the problem, not sure why
-    
+![Failed Beautiful Soup Code](Mars_Weather_Results/part_2_soup_fail.png?raw=true)
 
-* The HTML table was extracted into a Pandas DataFrame. Either Pandas or Splinter and Beautiful Soup were used to scrape the data. The columns have the correct headings and data types. (15 points)
+Instead I used Pandas to scrape the table information and arrange it into a dataframe (named weather_df) by coding pd.read_html(url)[0] where the [0] makes sure that the table is read as a table and not a list. This step allowed me to use weather_df in order to loop through its rows using .iterrows(), and storing each key and value pair in a JSON dictionary format. The keys were also remaned in this step to make the column names easier to understand. The dictionaries are stored in a list named mars_weather, which was then converted into the main dataframe mars_weather_df.
 
-* The data was analyzed to answer the following questions: (10 points)
-    * How many months exist on Mars? (5 points)
-    * How many Martian days' worth of data are there? (5 points)
+In the next step I prepared mars_weather_df for analysis. First I checked each column's data type with the .info() function and also confirmed that each cell was a non-null value. The only column that needed a different data type was the Terrestrial Date, which was converted to datetime by using pd.to_datetime().
 
+# Data Analysis
+1. The first question was how many months are on Mars, and I used mars_weather_df["Martian Month"].nunique() to find that there are 12 months on Mars in a Martian year.
+
+2. Next was finding how many Martian days' worth of data were available, and mars_weather_df["Sol (Martian Days)"].nunique() found that there are 1867 Martian days' worth of data.
+
+3. The next question involved average low temperatures by month. To accomplish this I first found the average temp for each month by using a .groupby() function combined with a .mean() function to calculate average low temp by month: avg_temp = mars_weather_df.groupby("Martian Month")["Min Temp Cel"].mean(). Then I converted avg_temp into its own df (avg_temp_df), renaming the Min Temp Cel column as Min Temp Avg, and used this df to create a bar chart for the average min temp for each Martian month. See figure below. This figure can also be found in the Mars_Weather_Results folder.
+
+![Min Avg Temp by Martian Month](Mars_Weather_Results/min_avg_temp_by_month.png?raw=true)
+
+As shown by the chart and verified by finding the min and max average temps, Martian Month 3 is the coldest month and Martian Month 8 is the hottest month.
+
+4. The fourth question wanted us to find the average atmospheric pressure by Martian Month. First I found avg_pressure by mars_weather_df.groupby('Martian Month')['Pressure'].mean(), which stores the average pressure per month. Lastly I converted avg_pressure into a dataframe (avg_pressure_df) and used the df to create a bar chart showing the average pressure per month, shown below and also saved in the Mars_Weather_Results folder.
+
+![Avg Pressure by Martian Month](Mars_Weather_Results/avg_pressure_by_month.png?raw=true)
+
+Martian Month 9 had the highest average pressure.
+
+5. 
 * The data was analyzed to answer the following questions, and a data visualization was created to support each answer: (30 points)
-    * Which month, on average, has the lowest temperature? The highest? (10 points)
+    
     * Which month, on average, has the lowest atmospheric pressure? The highest? (10 points)
     * How many terrestrial days exist in a Martian year? A visual estimate within 25% was made. (10 points)
     
@@ -76,7 +91,8 @@ The DataFrame was exported into a CSV file. (5 points)
 
 ## References
 In this challenge, I referenced:
-Xpert Learning Assistant
-Module 11 activities
-Office hours
-Classmate questions and suggestions on Slack
+* Xpert Learning Assistant
+* Module 11 activities
+* Office hours
+* Classmate questions/suggestions on Slack
+* Stack Overflow, inserting images into Github markdown: https://stackoverflow.com/questions/13051428/how-to-display-images-in-markdown-files-on-github
